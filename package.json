@@ -1,0 +1,1 @@
+{"name":"ecosystem-postcards","version":"1.0.0","private":true,"scripts":{"dev":"next dev","build":"next build","start":"next start","check":"tsc --noEmit"},"dependencies":{"next":"16.3.4","react":"19.2.6","react-dom":"19.2.6","firebase-admin":"^13.0.0"},"devDependencies":{"typescript":"^5.9.3","@types/node":"^22.0.0","@types/react":"^19.0.0","@types/react-dom":"^19.0.0"}}
