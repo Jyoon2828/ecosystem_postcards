@@ -24,3 +24,9 @@ GitHub의 app/page.tsx, app/globals.css, app/layout.tsx, app/api/classroom/route
 firestore.rules는 브라우저 직접 읽기·쓰기를 차단하며 서버 Admin SDK가 데이터를 처리합니다. 학생 이름은 모둠 입장에 필요하지 않습니다. 교사 권한은 수업 생성 브라우저에 보관됩니다. 새 수업을 만들면 학생 입장 화면이 최신 수업에 연결됩니다. 이미 입장한 학생은 기존 수업에 남습니다.
 
 개인 엽서만 사용하려면 배포 주소에 /?mode=personal을 붙여 바로 열 수 있습니다. 개인 활동에는 Firebase 연결이나 모둠 입장이 필요하지 않습니다.
+
+## 학생 링크 및 교사 보호 업데이트
+학생 공통 링크는 /?mode=student 입니다. 학생 화면에는 교사 관리 버튼이 없습니다. 기본 주소에서는 잠금 표시가 있는 교사 진입 버튼이 보이지만 비밀번호 확인 전에는 관리 화면이 열리지 않습니다. 서버도 수업 생성·생태계 지정·단계 변경·수정 허용에 교사 비밀번호를 요구합니다.
+Vercel Settings → Environment Variables에서 TEACHER_PIN을 추가하고, Value에 교사만 아는 6글자 이상 비밀번호를 입력하세요. 알파벳과 숫자를 섞은 긴 비밀번호를 권장합니다. Production에 저장하고 재배포합니다. 기존 FIREBASE_SERVICE_ACCOUNT는 유지합니다. TEACHER_PIN은 NEXT_PUBLIC_로 시작하면 안 됩니다. 학생에게 이 비밀번호를 공유하지 않습니다. 교사는 /?mode=teacher에서 비밀번호를 입력하면 현재 수업을 관리하거나 새 수업을 만들 수 있습니다. 비밀번호는 브라우저 저장소에 저장하지 않아 새로고침하면 다시 확인합니다.
+클립보드 복사 실패 시 이전 방식 복사를 시도하고 주소 입력칸을 항상 표시합니다. 주소를 직접 선택해 복사할 수 있습니다.
+이번 변경은 app/page.tsx, app/globals.css, app/api/classroom/route.ts를 모두 반영해야 합니다. 프런트엔드만 바꾸면 서버의 교사 보호가 적용되지 않습니다.
